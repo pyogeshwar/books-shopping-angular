@@ -277,15 +277,4 @@ describe('DataService', () => {
       });
     });
   });
-  // describe('when calling setUserDetails', () => {
-  //   it('should  set User Details', () => {
-  //     const user = {
-  //       name: '',
-  //       email: '',
-  //       phone: '',
-  //       address: '',
-  //     };
-  //     expect(service.setUserDetails(user)).toEqual({});
-  //   });
-  // });
 });
