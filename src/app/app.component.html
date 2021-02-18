@@ -28,7 +28,9 @@
         routerLinkActive="active"
         routerLink="/cart"
       >
-        <mat-icon matBadge="{{ booksLength }}" matBadgeColor="warn"
+        <mat-icon
+          matBadge=" {{ cartItemsCount$ | async }} "
+          matBadgeColor="warn"
           >shopping_cart</mat-icon
         >Cart
       </mat-list-item>

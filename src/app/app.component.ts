@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from './services/data.service';
+import { Observable } from 'rxjs';
+import { BooksFacade } from './store/facades/books.facades';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,13 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent implements OnInit {
   title = 'angular10sample';
-  booksLength: number;
-  constructor(public dataService: DataService) {}
+  cartItemsCount$: Observable<number>;
+
+  constructor(
+    private booksFacade: BooksFacade
+  ) {}
 
   ngOnInit(): void {
-    this.getCartItems();
-  }
-
-  getCartItems(): void {
-    this.dataService.cartItems.subscribe((data) => {
-      this.booksLength = data.length;
-    });
+    this.cartItemsCount$ = this.booksFacade.cartItemsCount$;
   }
 }

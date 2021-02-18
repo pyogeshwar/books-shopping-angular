@@ -24,6 +24,7 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
+    "test:detectOpenHandles": "jest --detectOpenHandles",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -44,7 +45,9 @@
     "@ngrx/effects": "^10.1.2",
     "@ngrx/entity": "^10.1.2",
     "@ngrx/store": "^10.1.2",
+    "@ngrx/store-devtools": "^11.0.1",
     "jest-html-reporter": "^3.3.0",
+    "ngrx-actions": "^4.0.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

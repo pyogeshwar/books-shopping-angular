@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { User } from '../../user';
+import { BooksFacade } from 'src/app/store/facades/books.facades';
+import { BookDetails } from '../../book.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +11,15 @@ import { User } from '../../user';
 })
 export class MyOrdersComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  books: any = [];
-  user: User;
-
-  constructor(public dataService: DataService) {}
+  orderedBooks$: Observable<BookDetails[]>;
+  user$: Observable<User>;
+  constructor(
+    public dataService: DataService,
+    private booksFacade: BooksFacade
+  ) {}
 
   ngOnInit(): void {
-    this.getUserData();
-    this.books = this.dataService.getDataFromLocalStorage();
-  }
-  getUserData(): void {
-    this.dataService.userData.subscribe((data) => {
-      this.user = data;
-    });
-  }
-  trackByMethod(el): string {
-    return el.id;
+    this.orderedBooks$ = this.booksFacade.orderedBooks$;
+    this.user$ = this.booksFacade.userInfo$;
   }
 }

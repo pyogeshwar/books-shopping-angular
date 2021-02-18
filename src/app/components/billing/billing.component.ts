@@ -4,18 +4,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 import { User } from '../../user';
+import { BooksFacade } from 'src/app/store/facades/books.facades';
 
 @Component({
   templateUrl: './billing.component.html',
 })
 export class BillingComponent {
   userForm: FormGroup;
-  post: User;
+  user: User;
 
   constructor(
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
-    public dataService: DataService
+    public dataService: DataService,
+    private booksFacade: BooksFacade
   ) {
     this.validateUserForm();
   }
@@ -30,8 +32,13 @@ export class BillingComponent {
   }
 
   onSubmit(post): void {
-    this.post = post;
-    this.dataService.setUserDetails(post);
+    // user.push(post);
+    this.booksFacade.userInfo(post);
+
+    const books = this.booksFacade.finalItemList$;
+    books.subscribe((item) => {
+      this.booksFacade.orderedItems(item);
+    });
 
     if (post) {
       this.dialog.open(DialogComponent);

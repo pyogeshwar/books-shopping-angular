@@ -1,5 +1,5 @@
 <mat-grid-list cols="2" rowHeight="200px">
-  <mat-grid-tile *ngFor="let book of books; trackBy: trackByMethod">
+  <mat-grid-tile *ngFor="let book of books">
     <mat-card class="books_card">
       <mat-card-header>
         <mat-card-title
@@ -21,7 +21,7 @@
         <p class="delete_book" *ngIf="isDelete == true">
           <button
             mat-icon-button
-            (click)="deleteCartItem(book)"
+            (click)="deleteCartItems(book)"
             color="warn"
             aria-label="Example icon button with a vertical three dot icon"
           >
@@ -32,8 +32,7 @@
           mat-raised-button
           color="warn"
           *ngIf="type == 'search'"
-          [routerLink]="['/book', book.id]"
-          (click)="viewBook(book)"
+          routerLink="/book/{{ book.id }}"
         >
           View
         </button>

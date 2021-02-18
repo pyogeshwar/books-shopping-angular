@@ -1,35 +1,35 @@
-<div class="bookDetails_page">
+<div class="selectedBookDetails_page">
   <mat-card class="form_card">
     <mat-card-header>
       <mat-card-title
-        ><span class="book_title">{{
-          book?.volumeInfo["title"]
+        ><span class="selectedBook_title">{{
+          selectedBook?.volumeInfo["title"]
         }}</span></mat-card-title
       >
-      <mat-card-subtitle>{{ book?.id || "2334" }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ selectedBook?.id || "2334" }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p class="book_desc">
+      <p class="selectedBook_desc">
         <strong>Description</strong> :
-        {{ book?.volumeInfo["description"] || book?.volumeInfo["title"] }}
+        {{ selectedBook?.volumeInfo["description"] || selectedBook?.volumeInfo["title"] }}
       </p>
-      <p class="book_title">
+      <p class="selectedBook_title">
         <strong> Written By</strong> :
-        {{ book?.volumeInfo["authors"] || book?.volumeInfo["title"] }}
+        {{ selectedBook?.volumeInfo["authors"] || selectedBook?.volumeInfo["title"] }}
       </p>
       <p>
         <strong> Published Data</strong> :
-        {{ book?.volumeInfo["publishedData"] || book?.id }}
+        {{ selectedBook?.volumeInfo["publishedData"] || selectedBook?.id }}
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="warn" (click)="addBookToCart(book)">
+      <button mat-raised-button color="warn" (click)="addBookToCart(selectedBook)">
         Add to cart
       </button>
       <button
         mat-raised-button
         color="warn"
-        (click)="byNow(book)"
+        (click)="buyNow(selectedBook)"
         routerLinkActive="active"
         routerLink="/billing"
       >

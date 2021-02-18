@@ -8,7 +8,7 @@
       />
     </mat-form-field>
   </div>
-  <div>
+  <div *ngIf="books$ | async as books">
     <app-books [books]="books" [type]="'search'"></app-books>
   </div>
 </div>
