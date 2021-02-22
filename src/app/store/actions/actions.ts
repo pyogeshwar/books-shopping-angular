@@ -32,3 +32,7 @@ export const orderedItems = createAction(
   '[Orders] Add To orders',
   props<{ payload: BookDetails[] }>()
 );
+export const UserInfo = createAction(
+  '[User] user address',
+  props<{ payload: User }>()
+);

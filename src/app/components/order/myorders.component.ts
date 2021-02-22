@@ -20,6 +20,6 @@ export class MyOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderedBooks$ = this.booksFacade.orderedBooks$;
-   // this.user$ = this.booksFacade.userInfo$;
+    this.user$ = this.booksFacade.userInfo$;
   }
 }

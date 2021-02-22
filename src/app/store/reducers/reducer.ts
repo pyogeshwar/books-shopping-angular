@@ -109,15 +109,15 @@ const reducer = createReducer(
       ...state,
       orderedList: payload.payload,
     });
+  }),
+  on(booksAction.UserInfo, (state, payload) => {
+    return Object.assign({
+      ...state,
+      userInfo: [...state.userInfo, payload.payload],
+    });
   })
-  // on(booksAction.userInfo, (state, payload) => {
-  //   return Object.assign({
-  //     ...state,
-  //     userInfo: [...state.userInfo, payload.payload],
-  //   });
-  // })
 );
 
-export function booksReducer(state: BooksState, action: Action) {
+export function booksReducer(state: BooksState, action: Action): State {
   return reducer(state, action);
 }
