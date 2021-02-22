@@ -1,8 +1,7 @@
-import { async, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { provideMockStore } from '@ngrx/store/testing';
-import { of } from 'rxjs/internal/observable/of';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject } from 'rxjs';
 
@@ -28,7 +27,7 @@ describe('BooksEffects', () => {
     })
   );
 
-  it('should call and execute addToCart method in facade', inject(
+  it('should call and get all books', inject(
     [DataService],
     (service: DataService) => {
       actions = new ReplaySubject(1);

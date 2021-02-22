@@ -14,7 +14,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let mockStore: MockStore;
-  let mockCollectionBooksSelector: MemoizedSelector<booksReducer.State, any>;
+  let mockBooksSelector: MemoizedSelector<booksReducer.State, any>;
   const initialState = [
     {
       kind: 'books#volume',
@@ -119,7 +119,7 @@ describe('AppComponent', () => {
         textSnippet:
           'Reimagined brilliantly, this novel tells the story of the son of Dushyant and Shakuntala, the grandson of Brahmarishi Vishwamitra, the man who changed the destiny of our country and gave it a brand new name—Bhaarat!',
       },
-    }
+    },
   ];
 
   beforeEach(async () => {
@@ -135,7 +135,7 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
     mockStore = TestBed.inject(MockStore);
-    mockCollectionBooksSelector = mockStore.overrideSelector(
+    mockBooksSelector = mockStore.overrideSelector(
       booksReducer.getCartItemsCount,
       initialState.length
     );
@@ -150,8 +150,8 @@ describe('AppComponent', () => {
   });
 
   it('should resolve test data', fakeAsync(() => {
-    component.cartItemsCount$.forEach((x) => {
-      expect(x).toEqual(1);
+    component.cartItemsCount$.forEach((item) => {
+      expect(item).toEqual(1);
     });
   }));
 });

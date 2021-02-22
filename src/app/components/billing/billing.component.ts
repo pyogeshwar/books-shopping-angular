@@ -33,7 +33,7 @@ export class BillingComponent {
 
   onSubmit(post): void {
     // user.push(post);
-    this.booksFacade.userInfo(post);
+   // this.booksFacade.userInfo(post);
 
     const books = this.booksFacade.finalItemList$;
     books.subscribe((item) => {

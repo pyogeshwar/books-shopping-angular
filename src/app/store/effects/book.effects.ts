@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import { DataService } from '../../services/data.service';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as bookActions from '../actions/actions';
@@ -10,7 +9,6 @@ import * as bookActions from '../actions/actions';
 export class BooksEffects {
   constructor(private dataService: DataService, private actions$: Actions) {}
 
-  // @Effect()
   loadBooks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(bookActions.Load),

@@ -137,9 +137,8 @@ describe('MyCartComponent', () => {
     selfLink: 'https://www.googleapis.com/books/v1/volumes/hbE4DwAAQBAJ',
     volumeInfo: {
       title: 'Bharat',
-      authors: ['Vineet Aggarwal'],
+      authors: 'Vineet Aggarwal',
       publisher: 'Penguin Random House India Private Limited',
-      publishedDate: '2017-09-25',
       description:
         'After Vishwamitra and The Legend of Parshu-Raam comes the epic saga of the king of Bharat-varsh! The kingdoms of Nabhi-varsh lie scattered in the wake of Parshu-Raam’s assault on corrupt Kshatriyas. While evil has been wiped out from the land, the important task of nation-building remains. In the forest of Naimish-Aranya, the stunned king of Hastinapur watches a young boy play with lion cubs. Who is this fearless child? How does his destiny entwine with that of this ancient kingdom? Will he be able to bring order to the land and defend it against the invaders lining up at its borders? Reimagined brilliantly, this novel tells the story of the son of Dushyant and Shakuntala, the grandson of Brahmarishi Vishwamitra, the man who changed the destiny of our country and gave it a brand new name—Bhaarat!',
       industryIdentifiers: [
@@ -272,7 +271,7 @@ describe('MyCartComponent', () => {
     expect(component).toBeTruthy();
   });
   it(
-    'should call getCart() method when component is resolved ',
+    'should call getCart() on component load ',
     waitForAsync(() => {
       spyOn(component, 'ngOnInit').and.callThrough();
       spyOn(component, 'getCart').and.callThrough();
@@ -283,7 +282,7 @@ describe('MyCartComponent', () => {
       fixture.detectChanges();
     })
   );
-  it('should call proceedToBuy() method and navigate to billingDetails page', inject(
+  it('should call proceedToBuy() method and navigate to billing page', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
       const proceedToBuySpy = spyOn(

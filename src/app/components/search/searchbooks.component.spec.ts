@@ -274,7 +274,7 @@ describe('SearchBooksComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call searchInputChange() method and navigate to billingDetails page', inject(
+  it('should call searchInputChange() method and navigate to billing page', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
       const spy = spyOn(component, 'searchInputChange').and.callThrough();

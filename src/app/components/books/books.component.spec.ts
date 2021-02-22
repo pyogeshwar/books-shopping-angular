@@ -129,7 +129,7 @@ describe('BooksComponent', () => {
     selfLink: 'https://www.googleapis.com/books/v1/volumes/hbE4DwAAQBAJ',
     volumeInfo: {
       title: 'Bharat',
-      authors: ['Vineet Aggarwal'],
+      authors: 'Vineet Aggarwal',
       publisher: 'Penguin Random House India Private Limited',
       publishedDate: '2017-09-25',
       description:
@@ -247,14 +247,14 @@ describe('BooksComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call deleteCartItems() method and navigate to billingDetails page', inject(
+  it('should call deleteCartItems() and delete item from cart', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
       const spy = spyOn(component, 'deleteCartItems').and.callThrough();
-      const finalItemListSpy = spyOn(facade, 'deleteFromCart');
+      const deleteSpy = spyOn(facade, 'deleteFromCart');
       component.deleteCartItems(book);
       expect(spy).toHaveBeenCalled();
-      expect(finalItemListSpy).toHaveBeenCalled();
+      expect(deleteSpy).toHaveBeenCalled();
     }
   ));
 });

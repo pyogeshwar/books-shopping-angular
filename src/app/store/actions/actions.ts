@@ -19,8 +19,8 @@ export const AddToCart = createAction(
   '[Cart] Add To Cart',
   props<{ payload: BookDetails }>()
 );
-export const AddToBuyList = createAction(
-  '[Purchase List] Add To buyList',
+export const AddToFinalList = createAction(
+  '[Order list] Add To orderList',
   props<{ payload: BookDetails[] }>()
 );
 
@@ -29,10 +29,6 @@ export const DeleteCartItem = createAction(
   props<{ payload: BookDetails }>()
 );
 export const orderedItems = createAction(
-  '[Collections] Add To orders',
-  props<{ payload: BookDetails[]; }>()
-);
-export const userInfo = createAction(
-  '[Collections] user Information',
-  props<{ payload: User; }>()
+  '[Orders] Add To orders',
+  props<{ payload: BookDetails[] }>()
 );

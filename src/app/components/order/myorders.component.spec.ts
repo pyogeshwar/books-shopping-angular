@@ -126,7 +126,7 @@ describe('MyOrdersComponent', () => {
         textSnippet:
           'Reimagined brilliantly, this novel tells the story of the son of Dushyant and Shakuntala, the grandson of Brahmarishi Vishwamitra, the man who changed the destiny of our country and gave it a brand new name—Bhaarat!',
       },
-    }
+    },
   ];
   beforeEach(async () => {
     await TestBed.configureTestingModule({

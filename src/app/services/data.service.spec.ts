@@ -193,13 +193,6 @@ describe('DataService', () => {
           'Application View Application Object w/ application ApplicationDispatcher <br>\ncomposite w/ dispatcher application&#39;s <b>object</b>-<b>object</b> dispatcher composed of <br>\nobject views Object-View Dispatcher Composite object view <b>Object</b>-<b>Object</b> <br>\nDispatcher&nbsp;...',
       },
       type: '[Cart] Add To Cart',
-      purchaseInfo: {
-        address:
-          'flat no - 312, block a,\nsvs avaasa apartments, annapurna enclave, chandanagar',
-        name: 'arthireddy pedditti',
-        email: 'a@test.com',
-        phoneNumber: '8019133370',
-      },
     },
   ];
 

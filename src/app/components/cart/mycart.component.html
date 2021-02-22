@@ -1,5 +1,5 @@
 <div class="mycart_page" *ngIf="cartBooks$ | async as cartBooks">
-  <app-books [books]="cartBooks"></app-books>
+  <app-books [books]="cartBooks" [isDelete]="true"></app-books>
   <span class="proceedToBuy_Btn">
     <button mat-raised-button color="warn" (click)="proceedToBuy(cartBooks)">
       Proceed to Buy

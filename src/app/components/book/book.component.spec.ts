@@ -22,7 +22,7 @@ describe('BookComponent', () => {
   let fixture: ComponentFixture<BookComponent>;
   let mockStore: MockStore;
   let router;
-  let mockCollectionBooksSelector: MemoizedSelector<booksReducer.State, any>;
+  let mockBooksSelector: MemoizedSelector<booksReducer.State, any>;
   const books = [
     {
       kind: 'books#volume',
@@ -136,9 +136,8 @@ describe('BookComponent', () => {
     selfLink: 'https://www.googleapis.com/books/v1/volumes/hbE4DwAAQBAJ',
     volumeInfo: {
       title: 'Bharat',
-      authors: ['Vineet Aggarwal'],
+      authors: 'Vineet Aggarwal',
       publisher: 'Penguin Random House India Private Limited',
-      publishedDate: '2017-09-25',
       description:
         'After Vishwamitra and The Legend of Parshu-Raam comes the epic saga of the king of Bharat-varsh! The kingdoms of Nabhi-varsh lie scattered in the wake of Parshu-Raam’s assault on corrupt Kshatriyas. While evil has been wiped out from the land, the important task of nation-building remains. In the forest of Naimish-Aranya, the stunned king of Hastinapur watches a young boy play with lion cubs. Who is this fearless child? How does his destiny entwine with that of this ancient kingdom? Will he be able to bring order to the land and defend it against the invaders lining up at its borders? Reimagined brilliantly, this novel tells the story of the son of Dushyant and Shakuntala, the grandson of Brahmarishi Vishwamitra, the man who changed the destiny of our country and gave it a brand new name—Bhaarat!',
       industryIdentifiers: [
@@ -249,7 +248,7 @@ describe('BookComponent', () => {
     }).compileComponents();
     router = TestBed.inject(Router);
     mockStore = TestBed.inject(MockStore);
-    mockCollectionBooksSelector = mockStore.overrideSelector(
+    mockBooksSelector = mockStore.overrideSelector(
       booksReducer.getBooks,
       books
     );
@@ -292,14 +291,14 @@ describe('BookComponent', () => {
     [BooksFacade],
     (facade: BooksFacade) => {
       spyOn(component, 'buyNow').and.callThrough();
-      const navigateSpy = spyOn(router, 'navigate');
+      const routeSpy = spyOn(router, 'navigate');
       const spy = spyOn(facade, 'finalItemList');
 
       component.buyNow(bookDetails);
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
       fixture.detectChanges();
-      expect(navigateSpy).toHaveBeenCalledWith(['billing']);
+      expect(routeSpy).toHaveBeenCalledWith(['billing']);
     }
   ));
 });

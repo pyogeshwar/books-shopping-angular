@@ -13,10 +13,16 @@ export interface BookDetails {
   selfLink?: string;
   volumeInfo?: {
     title?: string;
+    authors?: string;
     description?: string;
     ratingsCount?: string;
     pageCount?: string;
     language?: string;
+    publishedDate?: string;
+    averageRating?: number;
+    printType: string;
+    maturityRating: string;
+    contentVersion: string;
     imageLinks?: {
       smallThumbnail?: string;
       thumbnail?: string;
@@ -26,6 +32,5 @@ export interface BookDetails {
   saleInfo?: object;
   accessInfo?: object;
   searchInfo?: object;
-  purchaseInfo?: object;
   removeCartSymbole?: boolean;
 }

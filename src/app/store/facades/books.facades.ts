@@ -28,10 +28,10 @@ export class BooksFacade {
   ) as Observable<number>;
 
   finalItemList$ = this.store.pipe(
-    select(fromBook.getPurchaseItems)
+    select(fromBook.getfinalItemList)
   ) as Observable<BookDetails[]>;
 
-  userInfo$ = this.store.pipe(select(fromBook.getUserInfo)) as Observable<User>;
+  //userInfo$ = this.store.pipe(select(fromBook.getUserInfo)) as Observable<User>;
 
   constructor(private store: Store<fromBook.BooksState>) {}
   loadBooks(searchValue: string): void {
@@ -48,10 +48,10 @@ export class BooksFacade {
   }
 
   finalItemList(books: BookDetails[]): void {
-    this.store.dispatch(BookActions.AddToBuyList({ payload: books }));
+    this.store.dispatch(BookActions.AddToFinalList({ payload: books }));
   }
 
-  userInfo(user: User): void {
-    this.store.dispatch(BookActions.userInfo({ payload: user }));
-  }
+  // userInfo(user: User): void {
+  //   this.store.dispatch(BookActions.userInfo({ payload: user }));
+  // }
 }

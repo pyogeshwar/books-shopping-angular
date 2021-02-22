@@ -9,7 +9,7 @@ describe('Books Facade', () => {
   let mockStore: MockStore;
   let mockBooksSelector: MemoizedSelector<bookReducer.State, any>;
   let mockCartBooksSelector: MemoizedSelector<bookReducer.State, any>;
-  let mockCollectionBooksSelector: MemoizedSelector<bookReducer.State, any>;
+  let mockOrderedBooksSelector: MemoizedSelector<bookReducer.State, any>;
 
   const initialState = [
     {
@@ -131,7 +131,11 @@ describe('Books Facade', () => {
         ],
       }).compileComponents();
       mockStore = TestBed.inject(MockStore);
-      mockCollectionBooksSelector = mockStore.overrideSelector(
+      mockBooksSelector = mockStore.overrideSelector(
+        bookReducer.getBooks,
+        initialState
+      );
+      mockOrderedBooksSelector = mockStore.overrideSelector(
         bookReducer.getOrderedItems,
         initialState
       );
@@ -139,18 +143,15 @@ describe('Books Facade', () => {
         bookReducer.getCartItems,
         initialState
       );
-      mockBooksSelector = mockStore.overrideSelector(
-        bookReducer.getBooks,
-        initialState
-      );
-      mockCollectionBooksSelector = mockStore.overrideSelector(
+
+      mockOrderedBooksSelector = mockStore.overrideSelector(
         bookReducer.getCartItemsCount,
         initialState.length
       );
     })
   );
 
-  it('should be created', () => {
+  it('should create facade', () => {
     const facade: BooksFacade = TestBed.inject(BooksFacade);
     expect(facade).toBeTruthy();
   });
@@ -158,37 +159,34 @@ describe('Books Facade', () => {
   it('should initialize values from store', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
-      facade.cartBooks$.forEach((x) => {
-        expect(x[0].id).toContain('hbE4DwAAQBAJ');
+      facade.cartBooks$.forEach((item) => {
+        expect(item[0].id).toContain('hbE4DwAAQBAJ');
       });
-      facade.orderedBooks$.forEach((x) => {
-        expect(x[0].id).toContain('hbE4DwAAQBAJ');
+      facade.orderedBooks$.forEach((item) => {
+        expect(item[0].id).toContain('hbE4DwAAQBAJ');
       });
-      facade.cartItemsCount$.forEach((x) => {
-        expect(x).toEqual(1);
+      facade.cartItemsCount$.forEach((item) => {
+        expect(item).toEqual(1);
       });
-      facade.books$.forEach((x) => {
-        expect(x[0].id).toContain('hbE4DwAAQBAJ');
-      });
-    }
-  ));
-  it('should call and execute loadBooks method in facade', inject(
-    [BooksFacade],
-    (facade: BooksFacade) => {
-      const searchTerm = 'Bharat';
-      const loadBooksSpy = spyOn(facade, 'loadBooks').and.callThrough();
-      const mockStoreSpy = spyOn(mockStore, 'dispatch').and.callThrough();
-
-      facade.loadBooks(searchTerm);
-
-      expect(loadBooksSpy).toHaveBeenCalledWith(searchTerm);
-      expect(mockStoreSpy).toHaveBeenCalledWith({
-        payload: 'Bharat',
-        type: '[Book] Load Book',
+      facade.books$.forEach((item) => {
+        expect(item[0].id).toContain('hbE4DwAAQBAJ');
       });
     }
   ));
-  it('should call and execute addToCollections method in facade', inject(
+  it('should return all books', inject([BooksFacade], (facade: BooksFacade) => {
+    const searchTerm = 'Bharat';
+    const loadBooksSpy = spyOn(facade, 'loadBooks').and.callThrough();
+    const mockStoreSpy = spyOn(mockStore, 'dispatch').and.callThrough();
+
+    facade.loadBooks(searchTerm);
+
+    expect(loadBooksSpy).toHaveBeenCalledWith(searchTerm);
+    expect(mockStoreSpy).toHaveBeenCalledWith({
+      payload: 'Bharat',
+      type: '[Book] Load Book',
+    });
+  }));
+  it('should call and execute addToCart method', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
       const payload = {
@@ -198,7 +196,7 @@ describe('Books Facade', () => {
         selfLink: 'https://www.googleapis.com/books/v1/volumes/hbE4DwAAQBAJ',
         volumeInfo: {
           title: 'Bharat',
-          authors: ['Vineet Aggarwal'],
+          authors: 'Vineet Aggarwal',
           publisher: 'Penguin Random House India Private Limited',
           publishedDate: '2017-09-25',
           description:
@@ -296,13 +294,12 @@ describe('Books Facade', () => {
         },
       };
 
-      const x = { initialState };
-      const addToCollectionsSpy = spyOn(facade, 'addToCart').and.callThrough();
+      const spy = spyOn(facade, 'addToCart').and.callThrough();
       const mockStoreSpy = spyOn(mockStore, 'dispatch').and.callThrough();
 
       facade.addToCart(payload);
 
-      expect(addToCollectionsSpy).toHaveBeenCalledWith(payload);
+      expect(spy).toHaveBeenCalledWith(payload);
       expect(mockStoreSpy).toHaveBeenCalled();
     }
   ));

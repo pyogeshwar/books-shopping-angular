@@ -44,7 +44,7 @@ export const getCartItemsCount = createSelector(
   (state: BooksState) => state.cartItems.length
 );
 
-export const getPurchaseItems = createSelector(
+export const getfinalItemList = createSelector(
   getBookFeatureState,
   (state: BooksState) => state.orderedList
 );
@@ -104,18 +104,18 @@ const reducer = createReducer(
     });
   }),
 
-  on(booksAction.AddToBuyList, (state, payload) => {
+  on(booksAction.AddToFinalList, (state, payload) => {
     return Object.assign({
       ...state,
       orderedList: payload.payload,
     });
-  }),
-  on(booksAction.userInfo, (state, payload) => {
-    return Object.assign({
-      ...state,
-      userInfo: [...state.userInfo, payload.payload],
-    });
   })
+  // on(booksAction.userInfo, (state, payload) => {
+  //   return Object.assign({
+  //     ...state,
+  //     userInfo: [...state.userInfo, payload.payload],
+  //   });
+  // })
 );
 
 export function booksReducer(state: BooksState, action: Action) {
